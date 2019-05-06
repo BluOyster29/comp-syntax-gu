@@ -1,0 +1,45 @@
+concrete bandEng of bands = {
+  lincat
+    Comment , Item , Kind , Quality , Thing , Signal , Thing2 = Str ;
+  lin
+    Pred item signal thing2 = item ++ signal ++ thing2 ;
+    My kind = "concrete bandEng of bands = {
+  lincat
+    Comment , Item , Kind , Quality , Thing , Signal , Thing2 = Str ;
+  lin
+    Pred item signal thing2 = item ++ signal ++ thing2 ;
+    My kind = "My" ++ kind ;
+    Mod quality thing = quality ++ thing ;
+    Pos = "is" ;
+    Neg = "isn't" ;
+    Fav = "favourite" ;
+    L_Fav = "least favourite" ;
+    Band = "band" ;
+    Food = "food" ;
+    Country = "country" ;
+    Canada = "Canada" ;
+    Australia = "Australia" ;
+    KGALW = "King Gizzard and the Wizard Lizzard" ;
+    Bif = "Biffy Clyro" ;
+    IDLES = "IDLES" ;
+    Pizza = "pizza" ;
+    Chips = "chips" ;
+
+}" ++ kind ;
+    Mod quality thing = quality ++ thing ;
+    Pos = "is" ;
+    Neg = "isn't" ;
+    Fav = "favourite" ;
+    L_Fav = "least favourite" ;
+    Band = "band" ;
+    Food = "food" ;
+    Country = "country" ;
+    Canada = "Canada" ;
+    Australia = "Australia" ;
+    KGALW = "King Gizzard and the Wizard Lizzard" ;
+    Bif = "Biffy Clyro" ;
+    IDLES = "IDLES" ;
+    Pizza = "pizza" ;
+    Chips = "chips" ;
+
+}

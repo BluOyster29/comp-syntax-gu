@@ -1,0 +1,21 @@
+concrete FoodEng of Food = {
+  lincat
+    Comment, Item, Kind, Quality Negation = Str ;
+  lin
+    Pred item quality signal = item ++ signal ++ quality ;
+    This kind = "this" ++ kind ;
+    That kind = "that" ++ kind ; 
+    Mod quality kind = quality ++ kind ;
+    Wine = "wine" ;
+    Cheese = "cheese" ;
+    Fish = "fish" ;
+    Very quality = "very" ++ quality ;
+    Fresh = "fresh" ;
+    Warm = "warm" ;
+    Italian = "Italian" ;
+    Expensive = "expensive" ;
+    Delicious = "delicious" ; 
+    Boring = "boring" ;
+    Pos = "is" ;
+    Neg = "isn't" |  "is not"
+}
