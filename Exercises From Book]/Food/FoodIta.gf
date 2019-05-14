@@ -1,4 +1,4 @@
-concrete FoodEsp of Food = {
+concrete FoodIta of Food = {
   lincat
     Comment, Item, Kind, Quality = Str ;
   lin
