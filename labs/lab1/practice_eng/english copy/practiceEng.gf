@@ -1,5 +1,5 @@
---# -path=.:../abstract
-concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
+--# -path=.:../abstract copy
+concrete practiceEng of practice = open practiceRes, Prelude in {
 
 
   lincat
@@ -9,58 +9,23 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
     
     S  = {s : Str} ;
     QS = {s : Str} ;
-    Cl, QCl = {   -- word order is fixed in S and QS
+    Cl = {   -- word order is fixed in S and QS
       subj : Str ;                             -- subject
       verb : Bool => Bool => {fin,inf : Str} ; -- dep. on Pol,Temp, e.g. "does","sleep"
       compl : Str                              -- after verb: complement, adverbs
       } ;
-    Imp = {s : Bool => Str} ;
     VP = {verb : GVerb ; compl : Str} ;
-    AP = Adjective ;
-    CN = Noun ;
     NP = {s : Case => Str ; a : Agreement} ;
-    Pron = {s : Case => Str ; a : Agreement} ;
     Det = {s : Str ; n : Number} ;
-    Conj = {s : Str} ;
-    Prep = {s : Str} ;
-    V = Verb ;
-    V2 = Verb2 ;
-    A = Adjective ;
+    V = Verb ; 
     N = Noun ;
-    PN = {s : Str} ;
-    Adv = {s : Str} ;
+
+
 
   lin
-    UttS s = s ;
-    UttQS s = s ;
+
     UttNP np = {s = np.s ! Acc} ; -- Acc: produce "me" rather than "I"
-    UttAdv adv = adv ;
-    UttImpSg pol imp = {s = pol.s ++ imp.s ! pol.isTrue} ;
-
-    UseCl temp pol cl =
-      let clt = cl.verb ! pol.isTrue ! temp.isPres  -- isTrue regulates if "do" is used
-      in {
-        s = pol.s ++ temp.s ++    --- needed for parsing: a hack
-	    cl.subj ++               -- she
-	    clt.fin ++               -- does
-	    negation pol.isTrue ++   -- not
-	    clt.inf ++               -- drink
-	    cl.compl                 -- beer
-      } ;
-      
-    UseQCl temp pol cl =
-      let clt = cl.verb ! False ! temp.isPres      -- False means that "do" is always used
-      in {
-        s = pol.s ++ temp.s ++
-	    clt.fin ++               -- does
-	    cl.subj ++               -- she
-	    negation pol.isTrue ++   -- not
-	    clt.inf ++               -- drink
-	    cl.compl                 -- beer
-      } ;
-
-    QuestCl cl = cl ; -- since the parts are the same, we don't need to change anything
-
+    
     PredVP np vp = {
       subj = np.s ! Nom ;
       compl = vp.compl ;
@@ -82,13 +47,6 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
         -- the negation word "not" is put in place in UseCl, UseQCl
       }
     } ;
-
-    ImpVP vp = {
-      s = table {
-        True  => vp.verb.s ! VF Inf ++ vp.compl ;    -- in Eng, imperative = infinitive
-        False => "do not" ++ vp.verb.s ! VF Inf ++ vp.compl
-        }
-      } ;
 
     UseV v = {
       verb = verb2gverb v ;  -- lift ordinary verbs to generalized verbs
@@ -117,11 +75,7 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
 
     AdvVP vp adv =
       vp ** {compl = vp.compl ++ adv.s} ;
-      
-    DetCN det cn = {
-      s = table {c => det.s ++ cn.s ! det.n} ;
-      a = Agr det.n Per3   -- this kind of NP is always third person
-      } ;
+
       
     UsePN pn = {
       s = \\_ => pn.s ;
@@ -142,10 +96,6 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
     
     UseN n = n ;
     
-    AdjCN ap cn = {
-      s = table {n => ap.s ++ cn.s ! n}
-      } ;
-
     PositA a = a ;
 
     PrepNP prep np = {s = prep.s ++ np.s ! Acc} ;
@@ -179,14 +129,22 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
       s = table {Nom => "he" ; Acc => "him"} ;
       a = Agr Sg Per3
       } ;
+      
+    who_IP = {
+      s =  "who" ;
+    } ;
+      
+
     she_Pron = {
       s = table {Nom => "she" ; Acc => "her"} ;
       a = Agr Sg Per3
       } ;
+
     we_Pron = {
       s = table {Nom => "we" ; Acc => "us"} ;
       a = Agr Pl Per1
       } ;
+
     youPl_Pron = {
       s = \\_ => "you" ;
       a = Agr Pl Per2

@@ -1,9 +1,8 @@
-resource MiniResEng = open Prelude in {
+resource practiceRes = open Prelude in {
 
 param
   Number = Sg | Pl ;
   Case = Nom | Acc ;
-
   Person = Per1 | Per2 | Per3 ;
 
   Agreement = Agr Number Person ;
@@ -15,12 +14,12 @@ oper
   Noun : Type = {s : Number => Str} ;
 
   mkNoun : Str -> Str -> Noun = \sg,pl -> {
-    s = table {Sg => sg ; Pl => pl  }
+    s = table {Sg => sg ; Pl => pl}
     } ;
 
   regNoun : Str -> Noun = \sg -> mkNoun sg (sg + "s") ;
 
-  -- smart paradigm- making plural 
+  -- smart paradigm
   smartNoun : Str -> Noun = \sg -> case sg of {
     _ + ("ay"|"ey"|"oy"|"uy") => regNoun sg ;
     x + "y"                   => mkNoun sg (x + "ies") ;

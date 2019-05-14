@@ -1,4 +1,4 @@
-concrete MiniLexiconEng of MiniLexicon = MiniGrammarEng **
+concrete MiniLexiconPol of MiniLexicon = MiniGrammarPol **
   open
     MiniParadigmsEng
   in {

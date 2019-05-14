@@ -32,6 +32,11 @@ abstract MiniGrammar = {
     PN ;     -- proper name                         e.g. "Paris"
     Adv ;    -- adverbial phrase                    e.g. "in the house"
     
+
+-- extended grammar
+    
+    IPron ;   -- interrogative pronoun,    e.g. "who"
+    
   fun
 -- Phrase
     UttS      : S  -> Utt ;         -- John walks
@@ -100,5 +105,14 @@ abstract MiniGrammar = {
     youPl_Pron : Pron ;
     they_Pron  : Pron ;
 
+
     have_V2 : V2 ;
+
+--extended
+    who_IP  : IPron ;
+    --QuestVP   : IP -> VP -> QCl ;   -- who sees me
+
+
 }
+
+

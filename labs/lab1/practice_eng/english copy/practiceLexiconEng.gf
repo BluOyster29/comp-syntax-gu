@@ -1,6 +1,6 @@
-concrete MiniLexiconEng of MiniLexicon = MiniGrammarEng **
+concrete practiceLexicon of practiceLexicon = practiceEng **
   open
-    MiniParadigmsEng
+    practiceParadigm
   in {
 lin already_Adv = mkAdv "already" ;
 lin animal_N = mkN "animal" ;
@@ -89,4 +89,5 @@ lin wine_N = mkN "wine" ;
 lin woman_N = mkN "woman" "women" ;
 lin yellow_A = mkA "yellow" ;
 lin young_A = mkA "young" ;
+
 }
