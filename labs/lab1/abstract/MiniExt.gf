@@ -15,9 +15,10 @@ cat
   VA ;   -- AP-complement verb,       e.g. "become"
 
 fun
-  QuestVP   : IP -> VP -> QCl ;   -- who sees me
+     -- who sees me
   QuestV2   : IP -> V2 -> QCl ;   -- whom do I see
   QuestIAdv : IAdv -> Cl -> QCl ; -- where does she see me
+  
 
   UseRCl    : Temp -> Pol -> RCl -> RS ;
   RelVP     : RP -> VP -> RCl ;  -- that sees me

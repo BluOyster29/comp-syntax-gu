@@ -31,12 +31,9 @@ abstract MiniGrammar = {
     N ;      -- common noun                         e.g. "house"
     PN ;     -- proper name                         e.g. "Paris"
     Adv ;    -- adverbial phrase                    e.g. "in the house"
-    
+    IP  ;    -- interrogative pronoun               e.g "who"
 
 -- extended grammar
-    
-    IPron ;   -- interrogative pronoun,    e.g. "who"
-    
   fun
 -- Phrase
     UttS      : S  -> Utt ;         -- John walks
@@ -44,6 +41,7 @@ abstract MiniGrammar = {
     UttNP     : NP -> Utt ;         -- John
     UttAdv    : Adv -> Utt ;        -- in the house
     UttImpSg  : Pol -> Imp -> Utt ; -- (do not) walk ----s
+    QuestVP   : IP -> VP -> QCl ;   -- who sees me
 
 -- Sentence
     UseCl     : Temp -> Pol -> Cl   -> S ;  -- John has not walked
@@ -59,11 +57,14 @@ abstract MiniGrammar = {
     UseNP     : NP  -> VP ;             -- be a man ---s
     UseAdv    : Adv -> VP ;             -- be in the house ---s
     AdvVP     : VP -> Adv -> VP ;       -- sleep here
+    QuestVP   : IP -> VP -> QCl ;   -- who sees me
 
 -- Noun
     DetCN     : Det -> CN -> NP ;       -- the man
     UsePN     : PN -> NP ;              -- John
     UsePron   : Pron -> NP ;            -- he
+    UseIP     : IP -> NP ;
+
     MassNP    : CN -> NP ;              -- milk
     a_Det     : Det ;                   -- indefinite singular ---s
     aPl_Det   : Det ;                   -- indefinite plural   ---s
@@ -104,13 +105,14 @@ abstract MiniGrammar = {
     we_Pron    : Pron ;
     youPl_Pron : Pron ;
     they_Pron  : Pron ;
+    
 
 
     have_V2 : V2 ;
 
 --extended
-    who_IP  : IPron ;
-    --QuestVP   : IP -> VP -> QCl ;   -- who sees me
+    who_IP  : IP ;
+    what_IP : IP ;
 
 
 }

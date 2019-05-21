@@ -20,7 +20,7 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
     CN = Noun ;
     NP = {s : Case => Str ; a : Agreement} ;
     Pron = {s : Case => Str ; a : Agreement} ;
-    IPron = {s : Case => Str;} ;
+    IPron = {s : Case => Str ; a : Agreement} ;
     Det = {s : Str ; n : Number} ;
     Conj = {s : Str} ;
     Prep = {s : Str} ;
@@ -30,10 +30,12 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
     N = Noun ;
     PN = {s : Str} ;
     Adv = {s : Str} ;
-    IP = {s : Str} ;
+    IP = {s : Case => Str; a : Agreement} ;
 
 
   lin
+
+
     UttS s = s ;
     UttQS s = s ;
     UttNP np = {s = np.s ! Acc} ; -- Acc: produce "me" rather than "I"
@@ -64,6 +66,7 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
 
     QuestCl cl = cl ; -- since the parts are the same, we don't need to change anything
 
+
     PredVP np vp = {
       subj = np.s ! Nom ;
       compl = vp.compl ;
@@ -85,7 +88,14 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
         -- the negation word "not" is put in place in UseCl, UseQCl
       }
     } ;
+    
 
+    QuestVP ip vp = {
+      compl : vp.s ; 
+      subj : ip.s;
+      verb : Prelude.Bool => Prelude.Bool => {fin : Str; inf : Str}
+      } ;
+    
     ImpVP vp = {
       s = table {
         True  => vp.verb.s ! VF Inf ++ vp.compl ;    -- in Eng, imperative = infinitive
@@ -121,17 +131,22 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
     AdvVP vp adv =
       vp ** {compl = vp.compl ++ adv.s} ;
       
+    
+    
     DetCN det cn = {
       s = table {c => det.s ++ cn.s ! det.n} ;
       a = Agr det.n Per3   -- this kind of NP is always third person
       } ;
       
+
     UsePN pn = {
       s = \\_ => pn.s ;
       a = Agr Sg Per3
       } ;
       
     UsePron p = p ;  -- Pron is worst-case NP  
+    UseIP p = p ;
+  --UseIP p = p ;  -- Pron is worst-case  NP  
       
     MassNP cn = {
       s = \\_ => cn.s ! Sg ;
@@ -180,12 +195,19 @@ concrete MiniGrammarEng of MiniGrammar = open MiniResEng, Prelude in {
       } ;
     he_Pron = {
       s = table {Nom => "he" ; Acc => "him"} ;
-      a = Agr Sg Per3
+      a = Agr Sg Per3 
       } ;
       
     who_IP = {
-      s =  table {Pos => "who" ; Obj => "who"} ;
-    } ;
+      s = table {Nom => "who" ; Acc => "who"} ;
+      a = Agr Sg Per3
+      } ;
+
+    what_IP = {
+      s = table {Nom => "what" ; Acc => "what"} ;
+      a = Agr Sg Per3
+      } ;
+      
       
 
     she_Pron = {
